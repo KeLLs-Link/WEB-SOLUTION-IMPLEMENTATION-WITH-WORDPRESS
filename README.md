@@ -2,7 +2,7 @@
 
 
 A Three-Tier Architecture consisting of a **`Presentation or Client tier`** (Frontend), **`Logic or Application tier`** (Backend) and **`Data tier`**(Database).
-![Image](./screenshots/Snipaste_2024-03-26_12-03-36.png)
+![Image](./screenshots/threetierarchitecture.png)
 
 A three-tier application is a type of software architecture that divides an application into three interconnected layers, each responsible for specific functionality and tasks. These layers typically include:
 
