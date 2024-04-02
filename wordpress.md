@@ -177,4 +177,35 @@ sudo mkdir -p /var/www/html
 sudo mkdir -p /home/recovery/logs
 ```
 ### **Mount /var/www/html on apps-lv logical volume**
+```
+sudo mount /dev/webdata-vg/apps-lv /var/www/html/
+```
+### **Use `rsync utility` to back up all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)**
+
+```
+sudo rsync -av /var/log/. /home/recovery/logs/
+```
+![image](./screenshots/mount.png)
+
+### **Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why step the step above is very important)**
+```
+sudo mount /dev/webdata-vg/logs-lv /var/log
+```
+### **Restore log files back into /var/log directory**
+```
+sudo rsync -av /home/recovery/logs/. /var/log
+```
+
+### **UPDATE THE `/ETC/FSTAB` FILE**
+
+### **Update /etc/fstab file so that the mount configuration will persist after restart of the server.**
+
+The UUID of the device will be used to update the /etc/fstab file
+
+```
+sudo blkid
+```
+![image](./screenshots/blkid.png)
+
+
 
