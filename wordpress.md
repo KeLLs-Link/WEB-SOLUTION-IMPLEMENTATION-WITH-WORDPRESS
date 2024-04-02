@@ -66,4 +66,34 @@ Use `lsblk` utility to view the newly configured partition on each of the 3 disk
 
 ![image](./screenshots/lsblkkk.png)
 
+Install `lvm2` package using 
+
+**`lvm2:`** This is a ***Logical Volume Manager*** version 2, which is a system toolset that provides logical volume management capabilities on Linux systems. LVM allows you to manage disk space more flexibly by abstracting physical storage devices into logical volumes that can be resized and moved dynamically.
+
+```
+sudo yum install lvm2
+```
+Run 
+```
+run rpm -q lvm2 
+
+or
+
+yum list installed | grep lvm2
+```
+to ensure lvm is succesfully installed.
+
+![image](./screenshots/lvm.png)
+
+![image](./screenshots/lvmm.png)
+
+run
+```
+sudo lvmdiskscan
+```
+ command to check for available partitions.
+
+![image](./screenshots/lvdmk.png)
+
+
 
