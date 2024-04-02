@@ -7,7 +7,7 @@ I will be using a **`RedHat OS`** as the underlying OS for my EC2 Server in this
 ![image](./screenshots/redhart.png)
 ![image](./screenshots/redhatinstancerunning.png)
 
-- Create 3 EBS (Elastic Block Store) Volumes in the same AZ (Availability Zone) as your Web Server EC2, each EBS Volume should be 10 GB in size.
+### **Create 3 EBS (Elastic Block Store) Volumes in the same AZ (Availability Zone) as your Web Server EC2, each EBS Volume should be 10 GB in size.**
 
 ![image](./screenshots/volumes.png)
 
@@ -19,7 +19,7 @@ I will be using a **`RedHat OS`** as the underlying OS for my EC2 Server in this
 
 ![image](./screenshots/ebsattached.png)
 
-Open up the Linux terminal to begin configuration
+### **Open up the Linux terminal to begin configuration**
 
 Run 
 ```
@@ -45,7 +45,7 @@ Notice names of your newly created devices. All devices in Linux reside in **`/d
 
 ![image](./screenshots/lsblk.png)
 
-Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names are xvdb, xvdc, xvdd.
+### **Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names are xvdb, xvdc, xvdd.**
 
 ![image](./screenshots/lsdev.png)
 
@@ -55,14 +55,14 @@ df -h
 ```
 command to see all mounts and free space on your server.
 
-Use fdisk utility to create a single partition on each of the 3 disks.
+### **Use fdisk utility to create a single partition on each of the 3 disks.**
 
 ```
 sudo fdisk /dev/xvdb
 ```
 ![image](./screenshots/firstpartition.png)
 
-Use `lsblk` utility to view the newly configured partition on each of the 3 disks.
+### **Use `lsblk` utility to view the newly configured partition on each of the 3 disks.**
 
 ![image](./screenshots/lsblkkk.png)
 
@@ -95,7 +95,7 @@ sudo lvmdiskscan
 
 ![image](./screenshots/lvdmk.png)
 
-Use **`pvcreate utility`** to mark each of 3 disks as physical volumes (PVs) to be used by LVM.
+### **Use **`pvcreate utility`** to mark each of 3 disks as physical volumes (PVs) to be used by LVM.**
 
 ![image](./screenshots/pvs.png)
 
@@ -105,7 +105,7 @@ sudo pvs
 ```
 ![pvs](./screenshots/pvss.png)
 
-Use `vgcreate utility` to add all 3 PVs to a volume group (VG). Name the VG webdata-vg
+### **Use `vgcreate utility` to add all 3 PVs to a volume group (VG). Name the VG webdata-vg**
 
 The **`vgcreate utility`** is part of the Logical Volume Manager (LVM) suite of tools on Linux systems. It is used to create a new volume group (VG) within the LVM infrastructure.
 
@@ -118,7 +118,7 @@ sudo vgs
 ```
 ![p](./screenshots/vgs.png)
 
-Use `lvcreate utility` to create 2 logical volumes. apps-lv (Use half of the PV size), and logs-lv Use the remaining space of the PV size. 
+### **Use `lvcreate utility` to create 2 logical volumes. apps-lv (Use half of the PV size), and logs-lv Use the remaining space of the PV size.** 
 
 ***NOTE: apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs.***
 
@@ -132,7 +132,7 @@ sudo lvs
 ```
 ![image](./screenshots/sudolvs.png)
 
-Verify the entire setup
+### **Verify the entire setup**
 
 sudo vgdisplay -v #view complete setup - VG, PV, and LV
 
@@ -146,3 +146,35 @@ sudo vgdisplay -v #view complete setup - VG, PV, and LV
 sudo lsblk 
 ```
 ![image](./screenshots/lsblk2all.png)
+
+### **Use `mkfs.ext4` to format the logical volumes with ext4 filesystem**
+```
+sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
+
+The **`mkfs.ext4`** command is used in Linux systems to create an ext4 file system on a block device. ***Ext4 (Fourth Extended File System)*** is a widely used file system type in Linux distributions due to its stability, performance, and features.
+
+For example after running the command `sudo mkfs.ext4 /dev/sdb1
+` the mkfs.ext4 command formats the specified block device /dev/sdb1 with the ext4 file system. This process initializes the file system metadata structures, sets up the journaling system for data consistency, and prepares the block device for storing files and directories.
+
+Once the file system is created, you can mount it to a directory in the Linux file system hierarchy using the mount command, allowing you to access and use the storage space provided by the block device.
+
+```
+sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
+![image](./screenshots/formated.png)
+
+### **Create /var/www/html directory to store website files**
+
+```
+sudo mkdir -p /var/www/html
+```
+### **Create /home/recovery/logs to store backup of log data**
+
+```
+sudo mkdir -p /home/recovery/logs
+```
+### **Mount /var/www/html on apps-lv logical volume**
+
