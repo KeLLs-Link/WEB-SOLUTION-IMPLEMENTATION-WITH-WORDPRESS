@@ -12,6 +12,7 @@ I will be using a **`RedHat OS`** as the underlying OS for my EC2 Server in this
 ![image](./screenshots/volumes.png)
 
 ![image](./screenshots/volumess.png)
+
 ![image](./screenshots/3ebsvolumes.png)
 
 3 EBS volumes (volume a, b, & c) has been succesfully created and available for attachment to our server.
