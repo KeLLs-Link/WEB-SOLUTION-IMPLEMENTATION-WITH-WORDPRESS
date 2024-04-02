@@ -19,6 +19,19 @@ I will be using a **`RedHat OS`** as the underlying OS for my EC2 Server in this
 ![image](./screenshots/ebsattached.png)
 
 Open up the Linux terminal to begin configuration
+
+Run 
+```
+sudo yum update
+```
+&
+```
+sudo yum upgrade
+```
+to update and upgrade the `RedHat OS`
+
+** Unlike **`apt`** (Advanced Package Tool),which is is a command-line package management utility used primarily in ***Debian-based Linux distributions, such as Ubuntu, Debian, and Linux Mint***,  **`yum`** is a command-line package management utility used in ***Red Hat-based Linux distributions, such as CentOS, Fedora, and Red Hat Enterprise Linux (RHEL)***. It stands for "Yellowdog Updater Modified." yum simplifies the process of installing, updating, removing, and managing software packages on a Linux system.
+
 Use 
 ```
 lsblk 
@@ -31,7 +44,7 @@ Notice names of your newly created devices. All devices in Linux reside in **`/d
 
 ![image](./screenshots/lsblk.png)
 
-Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names are xvde, xvdf, xvdg.
+Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there – their names are xvdb, xvdc, xvdd.
 
 ![image](./screenshots/lsdev.png)
 
@@ -44,6 +57,12 @@ command to see all mounts and free space on your server.
 Use fdisk utility to create a single partition on each of the 3 disks.
 
 ```
-sudo fdisk /dev/xvdf
+sudo fdisk /dev/xvdb
 ```
+![image](./screenshots/firstpartition.png)
+
+Use `lsblk` utility to view the newly configured partition on each of the 3 disks.
+
+![image](./screenshots/lsblkkk.png)
+
 
