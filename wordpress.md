@@ -95,5 +95,54 @@ sudo lvmdiskscan
 
 ![image](./screenshots/lvdmk.png)
 
+Use **`pvcreate utility`** to mark each of 3 disks as physical volumes (PVs) to be used by LVM.
+
+![image](./screenshots/pvs.png)
+
+Verify that your Physical volume has been created successfully by running 
+```
+sudo pvs
+```
+![pvs](./screenshots/pvss.png)
+
+Use `vgcreate utility` to add all 3 PVs to a volume group (VG). Name the VG webdata-vg
+
+The **`vgcreate utility`** is part of the Logical Volume Manager (LVM) suite of tools on Linux systems. It is used to create a new volume group (VG) within the LVM infrastructure.
+
+```
+sudo vgcreate webdata-vg /dev/xvdb1 /dev/xvdc1 /dev/xvdd1
+```
+Verify that your VG has been created successfully by running 
+```
+sudo vgs
+```
+![p](./screenshots/vgs.png)
+
+Use `lvcreate utility` to create 2 logical volumes. apps-lv (Use half of the PV size), and logs-lv Use the remaining space of the PV size. 
+
+***NOTE: apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs.***
+
+```
+sudo lvcreate -n apps-lv -L 14G webdata-vg
+sudo lvcreate -n logs-lv -L 14G webdata-vg
+```
+Verify that your Logical Volume has been created successfully by running 
+```
+sudo lvs
+```
+![image](./screenshots/sudolvs.png)
+
+Verify the entire setup
+
+sudo vgdisplay -v #view complete setup - VG, PV, and LV
 
 
+![image](./screenshots/vg.png)
+
+![image](./screenshots/vg2.png)
+
+![image](./screenshots/vg3.png)
+```
+sudo lsblk 
+```
+![image](./screenshots/lsblk2all.png)
