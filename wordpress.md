@@ -31,7 +31,7 @@ sudo yum upgrade
 ```
 to update and upgrade the `RedHat OS`
 
-** Unlike **`apt`** (Advanced Package Tool),which is is a command-line package management utility used primarily in ***Debian-based Linux distributions, such as Ubuntu, Debian, and Linux Mint***,  **`yum`** is a command-line package management utility used in ***Red Hat-based Linux distributions, such as CentOS, Fedora, and Red Hat Enterprise Linux (RHEL)***. It stands for "Yellowdog Updater Modified." yum simplifies the process of installing, updating, removing, and managing software packages on a Linux system.
+** Unlike **`apt`** (Advanced Package Tool),which is is a command-line package management utility used primarily in ***Debian-based Linux distributions, such as Ubuntu, Debian, and Linux Mint***,  **`yum`** is a command-line package management utility used in ***Red Hat-based Linux distributions, such as CentOS, Fedora, and Red Hat Enterprise Linux (RHEL)***. It stands for "`Yellowdog Updater Modified`." yum simplifies the process of installing, updating, removing, and managing software packages on a Linux system.
 
 Use 
 ```
@@ -96,6 +96,7 @@ sudo lvmdiskscan
 ![image](./screenshots/lvdmk.png)
 
 ### **Use **`pvcreate utility`** to mark each of 3 disks as physical volumes (PVs) to be used by LVM.**
+
 
 ![image](./screenshots/pvs.png)
 
@@ -187,7 +188,7 @@ sudo rsync -av /var/log/. /home/recovery/logs/
 ```
 ![image](./screenshots/mount.png)
 
-### **Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why step the step above is very important)**
+### **Mount /var/log on logs-lv logical volume. (Note that all the existing data on /var/log will be deleted. That is why the step above is very important)**
 ```
 sudo mount /dev/webdata-vg/logs-lv /var/log
 ```
