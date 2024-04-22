@@ -209,5 +209,42 @@ sudo blkid
 ![image](./screenshots/blkid.png)
 
 
+### Install nano text editor first using 
+```
+sudo yum install nano
+```
+Update /etc/fstab in this format using your own UUID and rememeber to remove the leading and ending quotes.
+
+![screenshot](./screenshots/sudoblkid.png)
+sudo nano /etc/fstab
+
+![screenshot](./screenshots/uuid.png)
+
+- **Test the configuration and reload the daemon**
+
+```
+sudo mount -a
+sudo systemctl daemon-reload
+```
+Verify your setup by running 
+```
+df -h
+```
+
+The **`df -h`** command is used to display disk space usage in a human-readable format on Unix-like operating systems, including Linux. Here's what each part of the command does:
+
+**`df`** : This command stands for "disk free" and is used to display information about available disk space on file systems.
+
+**`-h`** : This option stands for "human-readable" and is used to display disk space sizes in a format that is easier for humans to read. When used with df, it formats the sizes in kilobytes (K), megabytes (M), gigabytes (G), and terabytes (T), depending on the size of the disk.
+
+So, when you run **`df -h`**, the command will list all mounted file systems along with information about their total size, used space, available space, and utilization percentage, in a human-readable format.
+
+output must look like this 🔽
+
+![screenshot](./screenshots/daemonreloaded.png)
+
+
+- ### Prepare the Database Server
+
 
 
