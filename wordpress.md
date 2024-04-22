@@ -201,12 +201,13 @@ sudo rsync -av /home/recovery/logs/. /var/log
 
 ### **Update /etc/fstab file so that the mount configuration will persist after restart of the server.**
 
-The UUID of the device will be used to update the /etc/fstab file
+The UUID (Universally Unique Identifier) of the device will be used to update the /etc/fstab file
 
 ```
 sudo blkid
 ```
 ![image](./screenshots/blkid.png)
+
 
 
 
