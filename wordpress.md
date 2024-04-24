@@ -209,7 +209,7 @@ sudo blkid
 ![image](./screenshots/blkid.png)
 
 
-### Install nano text editor first using 
+### Install nano text editor first 
 ```
 sudo yum install nano
 ```
@@ -246,5 +246,6 @@ output must look like this 🔽
 
 - ### Prepare the Database Server
 
+Launch a second RedHat EC2 instance that will have a role – ‘DB Server’ Repeat the same steps as for the Web Server, but instead of `apps-lv` and `logs-lv`, create `db-lv` and `logs-lv`, then mount it to `/db directory` instead of `/var/www/html/`.
 
 
