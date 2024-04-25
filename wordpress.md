@@ -244,8 +244,38 @@ output must look like this 🔽
 ![screenshot](./screenshots/daemonreloaded.png)
 
 
-- ### Prepare the Database Server
+- ### STEP 2: Prepare the Database Server
 
 Launch a second RedHat EC2 instance that will have a role – ‘DB Server’ Repeat the same steps as for the Web Server, but instead of `apps-lv` and `logs-lv`, create `db-lv` and `logs-lv`, then mount it to `/db directory` instead of `/var/www/html/`.
+
+```
+sudo lvcreate -n db-lv -L 14G webdata-vg
+sudo lvcreate -n logs-lv -L 14G webdata-vg
+```
+![screenshot](./screenshots/db-lv.png)
+```
+sudo mkfs -t ext4 /dev/webdata-vg/db-lv && sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
+
+ Create /db directory to store database files instead of  create /var/www/html to store website files.
+ ```
+sudo mkdir -p /db
+```
+
+Create /home/recovery/logs to store backup of log data
+```
+sudo mkdir -p /home/recovery/logs
+```
+
+Mount /db on db-lv logical volume
+```
+sudo mount /dev/webdata-vg/db-lv /db
+```
+
+Use rsync utility to back up all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)
+sudo rsync -av /var/log/. /home/recovery/logs/
+
+Use rsync utility to back up all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)
+sudo rsync -av /var/log/. /home/recovery/logs/
 
 
