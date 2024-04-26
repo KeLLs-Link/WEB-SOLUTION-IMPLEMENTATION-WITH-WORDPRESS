@@ -273,9 +273,42 @@ sudo mount /dev/webdata-vg/db-lv /db
 ```
 
 Use rsync utility to back up all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)
+
+```
 sudo rsync -av /var/log/. /home/recovery/logs/
+```
 
 Use rsync utility to back up all the files in the log directory /var/log into /home/recovery/logs (This is required before mounting the file system)
-sudo rsync -av /var/log/. /home/recovery/logs/
 
+not yet executed the step below 👎
+
+```
+sudo rsync -av /var/log/. /home/recovery/logs/
+```
+
+### Step 3 Install WordPress on your Web Server
+
+Update the repository
+
+```
+sudo yum -y update
+```
+Install **`wget`**, **`Apache`** and it’s **`dependencies`**
+
+```
+sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json
+```
+Start **`Apache`**
+
+```
+sudo systemctl enable httpd && sudo systemctl start httpd
+```
+![image](./screenshots/apache.png)
+
+verify that the apache is running
+
+```
+sudo systemctl ststus httpd
+```
+![image](./screenshots/httpd.png)
 
