@@ -354,3 +354,16 @@ sudo setsebool -P httpd_can_network_connect_db 1
 ![image](./screenshots/selinuxpolicies.png)
 
 ### Step 4: Install MySQL on your DB Server
+
+```
+sudo yum update
+sudo yum install mysql-server
+```
+
+Verify that the mysql service is up and running by using `sudo systemctl status mysqld`. if it is not running, restart the service and enable it so it will be running even after reboot:
+```
+sudo systemctl restart mysqld
+sudo systemctl enable mysqld
+```
+![image](./screenshots/mysqlactive.png)
+
