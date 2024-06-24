@@ -95,6 +95,6 @@ Libraries like JDBC (for Java), psycopg2 (for Python), Sequelize (for Node.js), 
 Three-tier architectures are commonly used in **`web applications`**, **`enterprise systems`**, and **`distributed computing environments`**. They provide a structured and scalable approach to building complex software systems while promoting reusability, maintainability, and performance.
 
 
-**PS:** The reason why a three tier architecture is important is that it allows you to eperate your application into logical compartments. In a three-tier appliaction, you cannot have the client tier bypasing the logic tier to communicate with the data tier. this is one of the rules imposed on this kind of architecture or pattern. A **`two-tier`** archiecture typically has the logic and data tier combined together.
+**PS:** The reason why a three tier architecture is important is that it allows you to seperate your application into logical compartments. In a three-tier appliaction, you cannot have the client tier bypasing the logic tier to communicate with the data tier. this is one of the rules imposed on this kind of architecture or pattern. A **`two-tier`** archiecture typically has the logic and data tier combined together.
 
 A `MEAN, MERN, LAMP, LEMP` or any four letter stack is typically using a three-tier architecture.
