@@ -417,11 +417,13 @@ Add the following at the end of the file.
 
 ![image](./screenshots/clientserver.png)
 
+```
 sudo mysql
 
 sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
 
 sudo mysql -u myuser -p -h 172.31.22.124
+```
 
 Succesful connection from my Web Server to my DB server by using mysql-client.
 
@@ -435,6 +437,18 @@ show databases;
 
 Change permissions and configuration so `Apache` could use `WordPress`:
 
+```
+cd /var/www/html/wordpress
+ls -l
+sudo nano wp-config-php
+```
+
+![image](./screenshots/wpconfigfile.png)
+
+
+
+![image](./screenshots/dbhost.png)
+
 Enable `TCP port 80 in Inbound Rules` configuration for your Web Server EC2 (enable from everywhere 0.0.0.0/0 or from your workstation’s IP)
 
 Try to access from your browser the link to your WordPress 
@@ -442,55 +456,19 @@ Try to access from your browser the link to your WordPress
 ```
 http://<Web-Server-Public-IP-Address>/wordpress/
 ```
-![image](./screenshots/wordpressconfig.png)
 
 
+![image](./screenshots/siteaccessible.png)
+
+Wordpress successfully installed
+
+![image](./screenshots/wordpressinstalled.png)
+
+![image](./screenshots/wordpresssignin.png)
+
+![image](./screenshots/twelcome%20to%20wordpress.png)
 
 
+### **CONGRATULATIONS** 
 
-
-```
-#webserver details:
-
-/dev/mapper/webdata--vg-logs--lv: UUID="dee1e7fe-0a8b-43ec-8275-bbdfacf49f28" TYPE="ext4"
-
-/dev/mapper/webdata--vg-apps--lv: UUID="3f459e12-7081-473d-8667-81cb22f65a77" TYPE="ext4"
-```
-sudo mount -a
-sudo systemctl daemon-reload
-
-
-Dbserver storage
-xvde    xvde1
-xvdf    xvdf1
-xvdg    xvdg1
-
-sudo pvcreate /dev/xvde1
-sudo pvcreate /dev/xvdf1
-sudo pvcreate /dev/xvdg1
-
-sudo vgcreate webdata-vg /dev/xvde1 /dev/xvdf1 /dev/xvdg1
-
-sudo lvcreate -n db-lv -L 14G webdata-vg
-sudo lvcreate -n logs-lv -L 14G webdata-vg (shoud i have created this one too?)
-
-
-sudo mkfs -t ext4 /dev/webdata-vg/db-lv 
-sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
-
-sudo mkdir -p /db
-sudo mkdir -p /home/recovery/logs
-
-sudo mount /dev/webdata-vg/db-lv /db
-
-
-/dev/mapper/webdata--vg-db--lv: UUID="a1309cac-2a43-4af8-aca8-cb9524ef5959" TYPE="ext4"
-
-/dev/mapper/webdata--vg-logs--lv: UUID="4debc4ad-ebbd-4823-91fb-8b8bc9ac6a23" TYPE="ext4"
-
-CREATE USER `myuser`@`172.31.30.178` IDENTIFIED BY 'mypass';GRANT ALL ON wordpress.* TO 'myuser'@'<Web-Server-Private-IP-Address>';
-
-
-GRANT ALL ON wordpress.* TO 'myuser'@'172.31.30.178';
-
-FLUSH PRIVILEGES;
+**You have successfully configured a Linux storage susbystem and have also deployed a full-scale Web Solution using WordPress CMS and MySQL RDBMS.**
